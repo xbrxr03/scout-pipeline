@@ -109,18 +109,32 @@ INDEED_SEARCH_URLS = {
         "https://ca.indeed.com/jobs?q=software+engineering+internship&l=Scarborough%2C+ON&radius=50&sort=date",
         "https://ca.indeed.com/jobs?q=software+developer+intern+summer+2026&l=Toronto%2C+ON&radius=50&sort=date",
         "https://ca.indeed.com/jobs?q=developer+co-op+2026&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=software+intern&l=Scarborough%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=junior+developer+internship&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=web+developer+intern&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=data+engineer+intern+2026&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=python+intern&l=Scarborough%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=AI+ML+internship+2026&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=technology+analyst+intern&l=Toronto%2C+ON&radius=50&sort=date",
     ],
     "swe": [
         "https://ca.indeed.com/jobs?q=software+engineer&l=Scarborough%2C+ON&radius=50&sort=date",
         "https://ca.indeed.com/jobs?q=python+developer&l=Toronto%2C+ON&radius=50&sort=date",
         "https://ca.indeed.com/jobs?q=full+stack+developer+junior&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=backend+developer+entry+level&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=frontend+developer+junior&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=devops+engineer+junior&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=platform+engineer&l=Scarborough%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=software+developer+remote&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=react+developer+junior&l=Toronto%2C+ON&radius=50&sort=date",
+        "https://ca.indeed.com/jobs?q=node+developer&l=Toronto%2C+ON&radius=50&sort=date",
     ],
 }
 
 
 # ── Live Search + Apply ─────────────────────────────────────────────────────
 
-async def search_and_apply(category: str = "internship", dry_run: bool = False):
+async def search_and_apply(category: str = "internship", dry_run: bool = False, search_url: str = None):
     """
     Search Indeed LIVE, find an active SWE/internship job, apply to ONE.
     
@@ -142,8 +156,9 @@ async def search_and_apply(category: str = "internship", dry_run: bool = False):
         print(f"❌ Resume not found: {resume_path}")
         return False
     
+    # Use provided search URL or default to first URL for category
     search_urls = INDEED_SEARCH_URLS.get(category, INDEED_SEARCH_URLS["internship"])
-    first_url = search_urls[0]
+    first_url = search_url or search_urls[0]
     
     # Build role keywords string for the prompt
     if category == "internship":
@@ -358,6 +373,7 @@ async def main():
     parser.add_argument("--category", choices=["swe", "internship"], default="internship")
     parser.add_argument("--discover", action="store_true", help="Just find jobs, don't apply")
     parser.add_argument("--dry-run", action="store_true", help="Show what would happen without applying")
+    parser.add_argument("--run", type=int, default=0, help="Run number (rotates search URL)")
     args = parser.parse_args()
     
     # Load API key from .env if not set
@@ -375,7 +391,11 @@ async def main():
     if args.discover:
         await discover_jobs(category=args.category)
     else:
-        await search_and_apply(category=args.category, dry_run=args.dry_run)
+        # Rotate search URL based on run number
+        search_urls = INDEED_SEARCH_URLS.get(args.category, INDEED_SEARCH_URLS["internship"])
+        run_index = args.run % len(search_urls)
+        search_url_override = search_urls[run_index]
+        await search_and_apply(category=args.category, dry_run=args.dry_run, search_url=search_url_override)
 
 if __name__ == "__main__":
     asyncio.run(main())

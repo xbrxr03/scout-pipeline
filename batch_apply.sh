@@ -1,6 +1,6 @@
 #!/bin/bash
 # SCOUT Batch Apply — Runs scout_apply.py N times
-# Each run searches Indeed, finds a job, applies to ONE, and stops.
+# Each run uses a different search URL (rotated via --run flag)
 # Waits 60 seconds between runs to avoid detection.
 
 COUNT="${1:-10}"
@@ -24,10 +24,10 @@ for i in $(seq 1 "$COUNT"); do
     pkill -9 -f "chromium-1234" 2>/dev/null
     sleep 3
     
-    # Run the apply script with 900s (15 min) timeout
+    # Run the apply script with --run flag to rotate search URLs
     cd ~/Projects/auto-apply && source ~/Projects/ApplyPilot/.venv/bin/activate && \
     OLLAMA_API_KEY="0b35e4faf4f4421b952cfd3cad2622c0.iSCe8Sec0pMAiRvO6MeyVMyV" \
-    timeout 900 python3 scout_apply.py --category internship 2>&1 | tail -5
+    timeout 900 python3 scout_apply.py --category internship --run $((i-1)) 2>&1 | tail -10
     
     EXIT_CODE=$?
     
@@ -39,7 +39,6 @@ for i in $(seq 1 "$COUNT"); do
         FAILED=$((FAILED + 1))
     fi
     
-    # Check DB for what was applied
     echo "📊 Progress: $APPLIED applied, $FAILED failed out of $i runs"
     
     # Don't wait after the last run
