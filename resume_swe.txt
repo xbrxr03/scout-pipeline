@@ -1,0 +1,62 @@
+Abrar Habib
+Software Engineer — Full-Stack, Python, AI/ML
+Scarborough, ON · (647) 522-9553 · abrar04h@gmail.com · github.com/xbrxr03 · linkedin.com/in/xbrxr03 · abrarbuilds.com
+
+Software engineer with experience in backend APIs, data automation, and IT infrastructure. Built ClawOS, an AI agent system that runs locally without external APIs (53 stars on GitHub), and runs a self-hosted homelab.
+
+Skills
+
+Languages: Python, TypeScript, JavaScript, Bash, SQL
+Frontend: React, Next.js, Three.js, Tailwind CSS, HTML, CSS
+Backend: Node.js, Express, FastAPI, Django, REST APIs, WebSockets
+Databases: PostgreSQL, SQLite, MongoDB, ChromaDB
+Infrastructure: Docker, Nginx, Linux, AWS (EC2, S3), GitHub Actions, TrueNAS / ZFS, WireGuard
+AI / ML: Ollama, local LLMs, RAG, prompt engineering, Whisper, Piper
+
+Experience
+
+Data Operations Specialist | Jul 2024 – Nov 2025
+LionSton Group — Remote (Contract)
+- Reconciled over 10,000 financial records across QuickBooks and internal systems
+- Wrote Python scripts to automate data validation, which cut manual entry time by 60%
+- Maintained SQL pipelines moving data between accounting systems and reporting databases
+
+Software Developer | Summer 2022 – 2024
+VertexGrid Technologies — Remote (Contract)
+- Built and maintained REST APIs in Python (Django) for internal tools handling around 10,000 requests a day
+- Designed PostgreSQL schemas and added indexes to speed up slow queries on the busiest tables
+- Set up CI/CD with GitHub Actions to run tests and deploy to AWS EC2
+- Packaged services with Docker so dev, staging, and production matched; reviewed teammates' pull requests
+
+IT Support Technician | 2020 – 2022
+Go-Co — Toronto, ON
+- Set up and maintained network gear (routers, switches, Wi-Fi) across several sites for 50+ users
+- Managed Linux servers and SSH access, and wrote Bash scripts to automate setup
+- Troubleshooting LAN, DHCP, DNS, and VPN problems; built out workstations and dev environments
+
+Projects
+
+ClawOS | github.com/xbrxr03/clawos · 53 stars | 2024 – Present
+- An AI assistant that runs entirely on your own machine — no API keys, no cloud
+- Takes voice commands and runs them through a multi-step agent pipeline with manual approval before it acts
+- ChromaDB-backed long-term memory and 31 tool integrations, routing requests to different local models through Ollama
+- React dashboard that shows live agent activity over WebSockets
+- Built with Python, FastAPI, React, Docker, ChromaDB, and Ollama
+
+Homelab | abrarbuilds.com | 2023 – Present
+- Run a TrueNAS server on ZFS with mirrored drives for reliable storage
+- Set up a WireGuard VPN on a Raspberry Pi for remote access, plus AdGuard for network-wide DNS filtering
+- Run local language models with Ollama on a GPU, and host everything in Docker behind an Nginx reverse proxy
+- Tools: Linux, ZFS, WireGuard, Docker, Nginx, Raspberry Pi
+
+Education & Certifications
+
+Software Engineering Technology — Artificial Intelligence | Centennial College
+ChatGPT Prompt Engineering for Developers (DeepLearning.AI)
+AWS Generative AI Essentials (in progress)
+
+AVAILABILITY
+- Summer 2026 internship (May–August): Full-time
+- Fall 2026 co-op (September–December): Full-time
+- Available immediately for part-time or contract
+- Remote or Toronto/GTA hybrid

@@ -1,0 +1,1 @@
+node_modules/\n__pycache__/\n*.pyc\n.browser-use-profiles/\n.env\nconfig/profile.yml\n.DS_Store\n*.lock
